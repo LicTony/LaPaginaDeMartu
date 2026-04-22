@@ -13,18 +13,18 @@
 
         body {
             font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: linear-gradient(135deg, #E6E6FA 0%, #D8BFD8 100%);
             min-height: 100vh;
             padding: 40px 20px;
-            color: #e4e4e4;
+            color: #8787FF;
         }
 
         h1 {
             text-align: center;
             font-size: 2rem;
             margin-bottom: 30px;
-            color: #f0c674;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            color: #8787FF;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
             letter-spacing: 2px;
         }
 
@@ -38,10 +38,10 @@
         }
 
         .panel {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.4);
             border-radius: 12px;
             padding: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 20px rgba(155, 77, 150, 0.2);
         }
 
         .tabla-container {
@@ -56,12 +56,12 @@
         th, td {
             padding: 6px 20px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(155, 77, 150, 0.3);
         }
 
         th {
-            background: #f0c674;
-            color: #1a1a2e;
+            background: #B19CD9;
+            color: #8787FF;
             font-weight: bold;
             font-size: 1.1rem;
         }
@@ -71,26 +71,26 @@
         }
 
         tr:nth-child(even) {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.2);
         }
 
         tr:hover {
-            background: rgba(240, 198, 116, 0.15);
+            background: rgba(221, 160, 221, 0.3);
         }
 
         .tabla-numeros {
-            color: #7ec8e3;
+            color: #8787FF;
         }
 
         .tabla-romanos {
-            color: #f0c674;
+            color: #8787FF;
             font-weight: bold;
         }
 
         .reglas {
             margin-top: 15px;
             padding: 15px;
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.3);
             border-radius: 8px;
         }
 
@@ -98,7 +98,7 @@
             margin: 0;
             padding-left: 25px;
             line-height: 1.8;
-            color: #aaa;
+            color: #8787FF;
         }
 
         .juego-container {
@@ -108,37 +108,37 @@
 
         .juego {
             padding: 20px;
-            background: rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.4);
             border-radius: 12px;
             text-align: center;
         }
 
         .juego h2 {
-            color: #f0c674;
+            color: #8787FF;
             margin-bottom: 20px;
             font-size: 1.5rem;
         }
 
         .juego p {
             margin-bottom: 15px;
-            color: #aaa;
+            color: #8787FF;
         }
 
         .juego select {
             padding: 10px 15px;
             font-size: 1rem;
             border-radius: 6px;
-            background: #2a2a4e;
-            color: #e4e4e4;
-            border: 1px solid #f0c674;
+            background: #fff0f5;
+            color: #8787FF;
+            border: 2px solid #B19CD9;
             cursor: pointer;
         }
 
         .juego button {
             padding: 12px 30px;
             font-size: 1rem;
-            background: #f0c674;
-            color: #1a1a2e;
+            background: #B19CD9;
+            color: #8787FF;
             border: none;
             border-radius: 6px;
             cursor: pointer;
@@ -146,7 +146,7 @@
         }
 
         .juego button:hover {
-            background: #e0b664;
+            background: #9B7DD4;
         }
 
         .juego input {
@@ -154,21 +154,21 @@
             font-size: 1.2rem;
             text-align: center;
             border-radius: 6px;
-            background: #2a2a4e;
-            color: #e4e4e4;
-            border: 2px solid #f0c674;
+            background: #fff0f5;
+            color: #8787FF;
+            border: 2px solid #B19CD9;
             width: 200px;
             text-transform: uppercase;
         }
 
         .pregunta-num {
             margin-bottom: 10px;
-            color: #7ec8e3;
+            color: #8787FF;
         }
 
         .pregunta-texto {
             font-size: 2rem;
-            color: #f0c674;
+            color: #8787FF;
             margin: 20px 0;
             font-weight: bold;
         }
@@ -184,12 +184,12 @@
 
         .resultados .puntaje {
             font-size: 2rem;
-            color: #f0c674;
+            color: #8787FF;
             margin-bottom: 15px;
         }
 
         .resultados .mensaje {
-            color: #aaa;
+            color: #8787FF;
             margin-bottom: 20px;
         }
 
@@ -213,13 +213,13 @@
 
     <!-- Pedir nombre -->
     <div id="nombre-section" style="text-align:center; margin-bottom:30px; max-width:400px; margin:0 auto 30px;">
-        <p style="margin-bottom:15px; color:#aaa;">Bienvenido! Ingresa tu nombre para comenzar:</p>
-        <input type="text" id="nombre-jugador" placeholder="Tu nombre" style="padding:12px 20px; font-size:1.1rem; text-align:center; border-radius:6px; background:#2a2a4e; color:#e4e4e4; border:2px solid #f0c674; width:200px;">
+        <p style="margin-bottom:15px; color:#8787FF;">Bienvenid@! Ingresa tu nombre para comenzar:</p>
+        <input type="text" id="nombre-jugador" placeholder="Tu nombre" style="padding:12px 20px; font-size:1.1rem; text-align:center; border-radius:6px; background:#fff0f5; color:#8787FF; border:2px solid #B19CD9; width:200px;">
         <br><br>
-        <button onclick="guardarNombre()" style="padding:12px 30px; font-size:1rem; background:#f0c674; color:#1a1a2e; border:none; border-radius:6px; cursor:pointer; font-weight:bold;">Comenzar</button>
+        <button onclick="guardarNombre()" style="padding:12px 30px; font-size:1rem; background:#B19CD9; color:#8787FF; border:none; border-radius:6px; cursor:pointer; font-weight:bold;">Comenzar</button>
     </div>
     
-    <div class="contenido" id="tabla-section">
+    <div class="contenido" id="tabla-section" style="display:none;">
         <!-- Panel izquierdo: Tabla y reglas -->
         <div class="panel tabla-container">
             <table>
@@ -235,8 +235,8 @@
             <div class="reglas">
                 <ol>
                     <li>Los símbolos se leen de izquierda a derecha.</li>
-                    <li>Los símbolos <strong style="color:#f0c674">I, X, C, M</strong> se pueden repetir hasta 3 veces seguidos. Por ejemplo, el 3 se escribe <strong style="color:#f0c674">III</strong>.</li>
-                    <li>Los símbolos <strong style="color:#f0c674">V, L, D</strong> no se pueden repetir.</li>
+                    <li>Los símbolos <strong style="color:#8787FF">I, X, C, M</strong> se pueden repetir hasta 3 veces seguidos. Por ejemplo, el 3 se escribe <strong style="color:#8787FF">III</strong>.</li>
+                    <li>Los símbolos <strong style="color:#8787FF">V, L, D</strong> no se pueden repetir.</li>
                 </ol>
             </div>
         </div>
@@ -289,7 +289,7 @@
                     <p class="cara" id="cara">😊</p>
                     <p class="puntaje" id="puntaje"></p>
                     <p class="mensaje" id="mensaje"></p>
-                    <button id="boton-errores" onclick="toggleErrores()" style="display:none; margin-right:10px; padding:10px 20px; font-size:0.9rem; background:#ff6b6b; color:#1a1a2e; border:none; border-radius:6px; cursor:pointer; font-weight:bold;">Ver incorrectas</button>
+                    <button id="boton-errores" onclick="toggleErrores()" style="display:none; margin-right:10px; padding:10px 20px; font-size:0.9rem; background:#B19CD9; color:#FFFFFF; border:none; border-radius:6px; cursor:pointer; font-weight:bold;">Ver incorrectas</button>
                     <button onclick="reiniciar()">Jugar de nuevo</button>
                     <div id="lista-errores" style="display:none;"></div>
                 </div>
@@ -352,7 +352,7 @@
         function iniciarJuego() {
             modo = document.getElementById('modo').value;
             const nivel = parseInt(document.getElementById('nivel').value);
-juegoActual = [];
+            juegoActual = [];
             incorrectas = [];
             
             // Generar 10 preguntas aleatorias según el nivel
@@ -410,6 +410,11 @@ juegoActual = [];
                     tuRespuesta: respuesta,
                     respuestaCorrecta: correcta
                 });
+
+                // Si hay más de 4 errores, mostrar popup
+                if (incorrectas.length > 4) {
+                    alert('Concéntrate un poquito más. Usa la tablita ;-)');
+                }
             }
 
             preguntaActual++;
@@ -445,7 +450,6 @@ juegoActual = [];
             nombreJugador = nombreInput;
             document.getElementById('nombre-section').style.display = 'none';
             document.getElementById('tabla-section').style.display = 'flex';
-            document.getElementById('contenido').style.display = 'flex';
         }
 
         // Modificar mostrarResultados para usar el nombre
@@ -466,6 +470,8 @@ juegoActual = [];
 
             if (puntaje === 10) {
                 mensaje = `¡Felicitaciones ${nombreJugador}! Te sacaste un 10!`;
+            } else if (incorrectas.length > 4) {
+                mensaje = `Concéntrate un poquito más. Usa la tablita ;-)`;
             } else {
                 mensaje = `${nombreJugador}, sacaste ${puntaje} / 10`;
             }
@@ -476,22 +482,22 @@ juegoActual = [];
 
             // Mostrar botón de errores si hay incorrectas
             const botonErrores = document.getElementById('boton-errores');
-            const ListaErrores = document.getElementById('lista-errores');
+            const listaErrores = document.getElementById('lista-errores');
             if (incorrectas.length > 0) {
                 botonErrores.style.display = 'inline-block';
-                ListaErrores.style.display = 'none';
+                listaErrores.style.display = 'none';
             } else {
                 botonErrores.style.display = 'none';
-                ListaErrores.style.display = 'none';
+                listaErrores.style.display = 'none';
             }
         }
 
         function toggleErrores() {
             const lista = document.getElementById('lista-errores');
             if (lista.style.display === 'none') {
-                let html = '<table style="width:100%; margin-top:10px; border-collapse:collapse;"><tr><th style="text-align:left;padding:5px;background:#f0c674;color:#1a1a2e;">Pregunta</th><th style="text-align:left;padding:5px;background:#f0c674;color:#1a1a2e;">Tu respuesta</th><th style="text-align:left;padding:5px;background:#f0c674;color:#1a1a2e;">Correcta</th></tr>';
+                let html = '<table style="width:100%; margin-top:10px; border-collapse:collapse;"><tr><th style="text-align:left;padding:5px;background:#B19CD9;color:#8787FF;">Pregunta</th><th style="text-align:left;padding:5px;background:#B19CD9;color:#8787FF;">Tu respuesta</th><th style="text-align:left;padding:5px;background:#B19CD9;color:#8787FF;">Correcta</th></tr>';
                 for (let err of incorrectas) {
-                    html += `<tr><td style="padding:5px;border:1px solid #555;">${err.pregunta}</td><td style="padding:5px;border:1px solid #555;color:#ff6b6b;">${err.tuRespuesta}</td><td style="padding:5px;border:1px solid #555;color:#7ec8e3;">${err.respuestaCorrecta}</td></tr>`;
+                    html += `<tr><td style="padding:5px;border:1px solid #8787FF;">${err.pregunta}</td><td style="padding:5px;border:1px solid #8787FF;color:#FF6B6B;">${err.tuRespuesta}</td><td style="padding:5px;border:1px solid #8787FF;color:#8787FF;">${err.respuestaCorrecta}</td></tr>`;
                 }
                 html += '</table>';
                 lista.innerHTML = html;
@@ -510,7 +516,6 @@ juegoActual = [];
 
         // Ocultar secciones al inicio
         document.getElementById('tabla-section').style.display = 'none';
-        document.getElementById('contenido').style.display = 'none';
     </script>
 </body>
 </html>
