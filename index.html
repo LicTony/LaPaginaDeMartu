@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La prueba de Martu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #e4e4e4;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #f0c674;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .contenido {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .panel {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .tabla-container {
+            flex: 0 0 auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 6px 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        th {
+            background: #f0c674;
+            color: #1a1a2e;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        td {
+            font-size: 1.1rem;
+        }
+
+        tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        tr:hover {
+            background: rgba(240, 198, 116, 0.15);
+        }
+
+        .tabla-numeros {
+            color: #7ec8e3;
+        }
+
+        .tabla-romanos {
+            color: #f0c674;
+            font-weight: bold;
+        }
+
+        .reglas {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+        }
+
+        .reglas ol {
+            margin: 0;
+            padding-left: 25px;
+            line-height: 1.8;
+            color: #aaa;
+        }
+
+        .juego-container {
+            flex: 1 1 400px;
+            max-width: 450px;
+        }
+
+        .juego {
+            padding: 20px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .juego h2 {
+            color: #f0c674;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .juego p {
+            margin-bottom: 15px;
+            color: #aaa;
+        }
+
+        .juego select {
+            padding: 10px 15px;
+            font-size: 1rem;
+            border-radius: 6px;
+            background: #2a2a4e;
+            color: #e4e4e4;
+            border: 1px solid #f0c674;
+            cursor: pointer;
+        }
+
+        .juego button {
+            padding: 12px 30px;
+            font-size: 1rem;
+            background: #f0c674;
+            color: #1a1a2e;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .juego button:hover {
+            background: #e0b664;
+        }
+
+        .juego input {
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            text-align: center;
+            border-radius: 6px;
+            background: #2a2a4e;
+            color: #e4e4e4;
+            border: 2px solid #f0c674;
+            width: 200px;
+            text-transform: uppercase;
+        }
+
+        .pregunta-num {
+            margin-bottom: 10px;
+            color: #7ec8e3;
+        }
+
+        .pregunta-texto {
+            font-size: 2rem;
+            color: #f0c674;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .resultados {
+            display: none;
+        }
+
+        .resultados .cara {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .resultados .puntaje {
+            font-size: 2rem;
+            color: #f0c674;
+            margin-bottom: 15px;
+        }
+
+        .resultados .mensaje {
+            color: #aaa;
+            margin-bottom: 20px;
+        }
+
+        .oculto {
+            display: none;
+        }
+
+        .espacio {
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>La prueba de Martu</h1>
+    
+    <div class="contenido">
+        <!-- Panel izquierdo: Tabla y reglas -->
+        <div class="panel tabla-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Número</th>
+                        <th>Número Romano</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla">
+                </tbody>
+            </table>
+            <div class="reglas">
+                <ol>
+                    <li>Los símbolos se leen de izquierda a derecha.</li>
+                    <li>Los símbolos <strong style="color:#f0c674">I, X, C, M</strong> se pueden repetir hasta 3 veces seguidos. Por ejemplo, el 3 se escribe <strong style="color:#f0c674">III</strong>.</li>
+                    <li>Los símbolos <strong style="color:#f0c674">V, L, D</strong> no se pueden repetir.</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Panel derecho: Juego -->
+        <div class="panel juego-container">
+            <div class="juego">
+                <h2>Vale 10 Romano</h2>
+                
+                <!-- Selector de modo -->
+                <div id="selector-modo">
+                    <table style="width:100%; margin-bottom:15px;">
+                        <tbody>
+                        <tr>
+                            <td style="text-align:left; padding:5px;">
+                                <p style="margin-bottom:5px;">Modo de juego:</p>
+                                <select id="modo" style="width:100%;">
+                                    <option value="romano-a-numero">Romano a Número</option>
+                                    <option value="numero-a-romano">Número a Romano</option>
+                                    <option value="mesclado">Mesclado</option>
+                                </select>
+                            </td>
+                            <td style="text-align:left; padding:5px;">
+                                <p style="margin-bottom:5px;">Nivel:</p>
+                                <select id="nivel" style="width:100%;">
+                                    <option value="20">Nivel 1 (1-20)</option>
+                                    <option value="50">Nivel 2 (1-50)</option>
+                                    <option value="100">Nivel 3 (1-100)</option>
+                                    <option value="1000">Nivel 4 (1-1000)</option>
+                                    <option value="3000">Nivel 5 (1-3000)</option>
+                                </select>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <button onclick="iniciarJuego()">Iniciar Juego</button>
+                </div>
+
+                <!-- Área de juego -->
+                <div id="area-juego" class="oculto">
+                    <p class="pregunta-num">Pregunta <span id="pregunta-actual">1</span> de 10</p>
+                    <p id="pregunta" class="pregunta-texto"></p>
+                    <input type="text" id="respuesta" placeholder="Tu respuesta">
+                    <div class="espacio"></div>
+                    <button onclick="continuar()">Responder</button>
+                </div>
+
+                <!-- Resultados -->
+                <div id="resultados" class="resultados">
+                    <p class="cara" id="cara">😊</p>
+                    <p class="puntaje" id="puntaje"></p>
+                    <p class="mensaje" id="mensaje"></p>
+                    <button onclick="reiniciar()">Jugar de nuevo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Función para convertir números a romanos
+        function aRomano(numero) {
+            const valores = [
+                1000, 900, 500, 400,
+                100, 90, 50, 40,
+                10, 9, 5, 4,
+                1
+            ];
+            const simbolos = [
+                'M', 'CM', 'D', 'CD',
+                'C', 'XC', 'L', 'XL',
+                'X', 'IX', 'V', 'IV',
+                'I'
+            ];
+
+            let romano = '';
+            for (let i = 0; i < valores.length; i++) {
+                while (numero >= valores[i]) {
+                    romano += simbolos[i];
+                    numero -= valores[i];
+                }
+            }
+            return romano;
+        }
+
+        // Números romanos base
+        const numerosBase = [1, 5, 10, 50, 100, 500, 1000];
+        const tabla = document.getElementById('tabla');
+        let filas = '';
+
+        for (let i = 0; i < numerosBase.length; i++) {
+            filas += '<tr>';
+            filas += `<td class="tabla-numeros">${numerosBase[i]}</td><td class="tabla-romanos">${aRomano(numerosBase[i])}</td>`;
+            filas += '</tr>';
+        }
+
+        tabla.innerHTML = filas;
+
+        // --- Lógica del juego ---
+        let juegoActual = [];
+        let preguntaActual = 0;
+        let correctas = 0;
+        let modo = 'romano-a-numero';
+
+        const maxNumero = 3000;
+
+        function getRandomEntre(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function iniciarJuego() {
+            modo = document.getElementById('modo').value;
+            const nivel = parseInt(document.getElementById('nivel').value);
+            juegoActual = [];
+            
+            // Generar 10 preguntas aleatorias según el nivel
+            for (let i = 0; i < 10; i++) {
+                const num = getRandomEntre(1, nivel);
+                let pregunta, respuestaCorrecta;
+
+                if (modo === 'mesclado') {
+                    const esRomanoANumero = Math.random() > 0.5;
+                    if (esRomanoANumero) {
+                        pregunta = aRomano(num);
+                        respuestaCorrecta = num.toString();
+                    } else {
+                        pregunta = num.toString();
+                        respuestaCorrecta = aRomano(num);
+                    }
+                } else if (modo === 'romano-a-numero') {
+                    pregunta = aRomano(num);
+                    respuestaCorrecta = num.toString();
+                } else {
+                    pregunta = num.toString();
+                    respuestaCorrecta = aRomano(num);
+                }
+
+                juegoActual.push({ pregunta, respuestaCorrecta });
+            }
+
+            preguntaActual = 0;
+            correctas = 0;
+
+            document.getElementById('selector-modo').classList.add('oculto');
+            document.getElementById('area-juego').classList.remove('oculto');
+            document.getElementById('resultados').style.display = 'none';
+
+            mostrarPregunta();
+        }
+
+        function mostrarPregunta() {
+            document.getElementById('pregunta-actual').textContent = preguntaActual + 1;
+            document.getElementById('pregunta').textContent = juegoActual[preguntaActual].pregunta;
+            document.getElementById('respuesta').value = '';
+            document.getElementById('respuesta').focus();
+        }
+
+        function continuar() {
+            const respuesta = document.getElementById('respuesta').value.trim().toUpperCase();
+            const correcta = juegoActual[preguntaActual].respuestaCorrecta.toUpperCase();
+
+            if (respuesta === correcta) {
+                correctas++;
+            }
+
+            preguntaActual++;
+
+            if (preguntaActual < 10) {
+                mostrarPregunta();
+            } else {
+                mostrarResultados();
+            }
+        }
+
+        function mostrarResultados() {
+            document.getElementById('area-juego').classList.add('oculto');
+            document.getElementById('resultados').style.display = 'block';
+
+            const puntaje = correctas;
+            let cara, mensaje;
+
+            if (puntaje >= 8) {
+                cara = '😄';
+            } else if (puntaje >= 5) {
+                cara = '😐';
+            } else {
+                cara = '😢';
+            }
+
+            if (puntaje === 10) {
+                mensaje = '¡Felicitaciones! Te sacaste un 10 🎉';
+            } else {
+                mensaje = `Sacaste ${puntaje} / 10`;
+            }
+
+            document.getElementById('cara').textContent = cara;
+            document.getElementById('puntaje').textContent = puntaje + ' / 10';
+            document.getElementById('mensaje').textContent = mensaje;
+        }
+
+        function reiniciar() {
+            document.getElementById('selector-modo').classList.remove('oculto');
+            document.getElementById('resultados').style.display = 'none';
+        }
+
+        // Permitir presionar Enter para continuar
+        document.getElementById('respuesta').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                continuar();
+            }
+        });
+    </script>
+</body>
+</html>
