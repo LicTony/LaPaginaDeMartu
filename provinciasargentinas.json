@@ -1,0 +1,94 @@
+[
+  {
+    "provincia": "Buenos Aires",
+    "capital": "La Plata"
+  },
+  {
+    "provincia": "Catamarca",
+    "capital": "San Fernando del Valle de Catamarca"
+  },
+  {
+    "provincia": "Chaco",
+    "capital": "Resistencia"
+  },
+  {
+    "provincia": "Chubut",
+    "capital": "Rawson"
+  },
+  {
+    "provincia": "Cordoba",
+    "capital": "Cordoba"
+  },
+  {
+    "provincia": "Corrientes",
+    "capital": "Corrientes"
+  },
+  {
+    "provincia": "Entre Rios",
+    "capital": "Parana"
+  },
+  {
+    "provincia": "Formosa",
+    "capital": "Formosa"
+  },
+  {
+    "provincia": "Jujuy",
+    "capital": "San Salvador de Jujuy"
+  },
+  {
+    "provincia": "La Pampa",
+    "capital": "Santa Rosa"
+  },
+  {
+    "provincia": "La Rioja",
+    "capital": "La Rioja"
+  },
+  {
+    "provincia": "Mendoza",
+    "capital": "Mendoza"
+  },
+  {
+    "provincia": "Misiones",
+    "capital": "Posadas"
+  },
+  {
+    "provincia": "Neuquen",
+    "capital": "Neuquen"
+  },
+  {
+    "provincia": "Rio Negro",
+    "capital": "Viedma"
+  },
+  {
+    "provincia": "Salta",
+    "capital": "Salta"
+  },
+  {
+    "provincia": "San Juan",
+    "capital": "San Juan"
+  },
+  {
+    "provincia": "San Luis",
+    "capital": "San Luis"
+  },
+  {
+    "provincia": "Santa Cruz",
+    "capital": "Rio Gallegos"
+  },
+  {
+    "provincia": "Santa Fe",
+    "capital": "Santa Fe"
+  },
+  {
+    "provincia": "Santiago del Estero",
+    "capital": "Santiago del Estero"
+  },
+  {
+    "provincia": "Tierra del Fuego, Antartida e Islas del Atlantico Sur",
+    "capital": "Ushuaia"
+  },
+  {
+    "provincia": "Tucuman",
+    "capital": "San Miguel de Tucuman"
+  }
+]
