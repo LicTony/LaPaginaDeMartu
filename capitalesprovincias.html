@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capitales de Provincias - La prueba de Martu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #E6E6FA 0%, #D8BFD8 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #8787FF;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-volver {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.4);
+            color: #8787FF;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            border: 2px solid #B19CD9;
+            transition: background 0.2s;
+        }
+
+        .btn-volver:hover {
+            background: #B19CD9;
+            color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.8rem;
+            color: #8787FF;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+            letter-spacing: 2px;
+            flex-grow: 1;
+        }
+
+        .mensaje-container {
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(155, 77, 150, 0.2);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .mensaje-container h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .mensaje-container p {
+            font-size: 1.2rem;
+            line-height: 1.5;
+        }
+
+        /* --- Estilos Responsive (Mobile) --- */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 10px;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn-volver {
+                align-self: flex-start;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <a href="index.html" class="btn-volver">← Menú</a>
+        <h1>Capitales de Provincias</h1>
+        <div style="width: 100px; display: none;"></div>
+    </div>
+    
+    <div class="mensaje-container">
+        <h2 id="saludo-jugador"></h2>
+        <p>Esta página está en construcción. ¡Próximamente agregaremos el juego de capitales aquí!</p>
+    </div>
+
+    <script>
+        let nombreJugador = localStorage.getItem('martu_nombre');
+        
+        // Redirigir al inicio si no hay nombre
+        if (!nombreJugador) {
+            window.location.href = 'index.html';
+        } else {
+            document.getElementById('saludo-jugador').textContent = `¡Hola ${nombreJugador}!`;
+        }
+    </script>
+</body>
+</html>
