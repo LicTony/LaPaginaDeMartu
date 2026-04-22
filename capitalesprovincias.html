@@ -393,6 +393,389 @@
         // Inicializar mapa completo
         focusProvince("");
     </script>
+
+    <!-- ===================== JUEGO ===================== -->
+    <style>
+        #juego-container {
+            max-width: 640px;
+            margin: 40px auto 0;
+            background: rgba(255,255,255,0.4);
+            border-radius: 16px;
+            padding: 36px 32px;
+            box-shadow: 0 5px 20px rgba(155,77,150,0.2);
+        }
+
+        #juego-container h2 {
+            font-size: 1.8rem;
+            color: #8787FF;
+            text-align: center;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+        }
+
+        .juego-select {
+            width: 100%;
+            padding: 11px 14px;
+            border-radius: 8px;
+            border: 2px solid #B19CD9;
+            font-size: 1rem;
+            background: rgba(255,255,255,0.85);
+            color: #333;
+            margin-bottom: 20px;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .btn-juego {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 8px;
+            border: 2px solid #B19CD9;
+            background: rgba(255,255,255,0.45);
+            color: #8787FF;
+            font-size: 1.05rem;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .btn-juego:hover {
+            background: #B19CD9;
+            color: #fff;
+        }
+
+        .btn-juego:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
+        #juego-pregunta-area { display: none; }
+
+        .juego-progreso {
+            font-size: 0.9rem;
+            color: #9d7fc7;
+            margin-bottom: 8px;
+            text-align: right;
+        }
+
+        .juego-enunciado {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #5a4b81;
+            margin-bottom: 20px;
+            text-align: center;
+            min-height: 60px;
+        }
+
+        .juego-opciones {
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+            margin-bottom: 22px;
+        }
+
+        .juego-opcion {
+            padding: 13px 18px;
+            border-radius: 8px;
+            border: 2px solid #B19CD9;
+            background: rgba(255,255,255,0.6);
+            color: #5a4b81;
+            font-size: 1rem;
+            font-family: inherit;
+            cursor: pointer;
+            text-align: left;
+            transition: background 0.18s, border-color 0.18s;
+        }
+
+        .juego-opcion:hover:not(:disabled) {
+            background: #e8d8f8;
+            border-color: #8787FF;
+        }
+
+        .juego-opcion.correcta {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .juego-opcion.incorrecta {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        .juego-opcion:disabled { cursor: not-allowed; }
+
+        #btn-siguiente-juego {
+            display: none;
+            margin-top: 4px;
+        }
+
+        /* Resultados */
+        #juego-resultados { display: none; }
+
+        .resultado-puntaje {
+            font-size: 2.6rem;
+            font-weight: bold;
+            color: #8787FF;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .resultado-label {
+            text-align: center;
+            color: #7a6b9a;
+            font-size: 1.05rem;
+            margin-bottom: 26px;
+        }
+
+        .errores-titulo {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #8787FF;
+            margin-bottom: 14px;
+            border-top: 2px solid #B19CD9;
+            padding-top: 18px;
+        }
+
+        .error-item {
+            background: rgba(255,255,255,0.55);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            border-left: 4px solid #dc3545;
+            font-size: 0.95rem;
+            color: #5a4b81;
+        }
+
+        .error-item strong { color: #8787FF; }
+        .error-item .error-correcta { color: #28a745; font-weight: bold; }
+        .error-item .error-dada { color: #dc3545; }
+    </style>
+
+    <div id="juego-container">
+        <h2>🎮 ¡A jugar!</h2>
+
+        <!-- Pantalla inicio -->
+        <div id="juego-inicio">
+            <label for="modoJuego" style="font-weight:bold; display:block; margin-bottom:8px; color:#5a4b81;">Modo de juego:</label>
+            <select id="modoJuego" class="juego-select">
+                <option value="1">Modo 1 — Provincia → Capital</option>
+                <option value="2">Modo 2 — Capital → Provincia</option>
+                <option value="3">Modo 3 — Mezclado</option>
+            </select>
+            <div style="text-align:center;">
+                <button class="btn-juego" id="btn-empezar">Empezar</button>
+            </div>
+        </div>
+
+        <!-- Pantalla pregunta -->
+        <div id="juego-pregunta-area">
+            <div class="juego-progreso" id="juego-progreso"></div>
+            <div class="juego-enunciado" id="juego-enunciado"></div>
+            <div class="juego-opciones" id="juego-opciones"></div>
+            <div style="text-align:center;">
+                <button class="btn-juego" id="btn-siguiente-juego">Siguiente →</button>
+            </div>
+        </div>
+
+        <!-- Pantalla resultados -->
+        <div id="juego-resultados">
+            <div class="resultado-puntaje" id="resultado-puntaje"></div>
+            <div class="resultado-label" id="resultado-label"></div>
+            <div id="errores-lista"></div>
+            <div style="text-align:center; margin-top:20px;">
+                <button class="btn-juego" id="btn-rejugar">Jugar de nuevo</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        const DATOS = [
+            { provincia: "Buenos Aires",    capital: "La Plata" },
+            { provincia: "Catamarca",       capital: "San Fernando del Valle de Catamarca" },
+            { provincia: "Chaco",           capital: "Resistencia" },
+            { provincia: "Chubut",          capital: "Rawson" },
+            { provincia: "Córdoba",         capital: "Córdoba" },
+            { provincia: "Corrientes",      capital: "Corrientes" },
+            { provincia: "Entre Ríos",      capital: "Paraná" },
+            { provincia: "Formosa",         capital: "Formosa" },
+            { provincia: "Jujuy",           capital: "San Salvador de Jujuy" },
+            { provincia: "La Pampa",        capital: "Santa Rosa" },
+            { provincia: "La Rioja",        capital: "La Rioja" },
+            { provincia: "Mendoza",         capital: "Mendoza" },
+            { provincia: "Misiones",        capital: "Posadas" },
+            { provincia: "Neuquén",         capital: "Neuquén" },
+            { provincia: "Río Negro",       capital: "Viedma" },
+            { provincia: "Salta",           capital: "Salta" },
+            { provincia: "San Juan",        capital: "San Juan" },
+            { provincia: "San Luis",        capital: "San Luis" },
+            { provincia: "Santa Cruz",      capital: "Río Gallegos" },
+            { provincia: "Santa Fe",        capital: "Santa Fe" },
+            { provincia: "Santiago del Estero", capital: "Santiago del Estero" },
+            { provincia: "Tierra del Fuego", capital: "Ushuaia" },
+            { provincia: "Tucumán",         capital: "San Miguel de Tucumán" }
+        ];
+
+        const TOTAL = 10;
+
+        let preguntas = [];
+        let indice = 0;
+        let puntaje = 0;
+        let errores = [];
+        let modo = 1;
+
+        function shuffle(arr) {
+            const a = [...arr];
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        function generarPreguntas(modoSel) {
+            const base = shuffle(DATOS).slice(0, TOTAL);
+            return base.map((item, i) => {
+                // tipo: 1 = provincia→capital, 2 = capital→provincia
+                let tipo = modoSel === 3 ? (Math.random() < 0.5 ? 1 : 2) : parseInt(modoSel);
+                return { item, tipo };
+            });
+        }
+
+        function generarOpciones(pregunta) {
+            const { item, tipo } = pregunta;
+            // Correcta
+            const correcta = tipo === 1 ? item.capital : item.provincia;
+            // Pool de incorrectas (del mismo campo que la correcta)
+            const pool = DATOS
+                .filter(d => (tipo === 1 ? d.capital : d.provincia) !== correcta)
+                .map(d => tipo === 1 ? d.capital : d.provincia);
+            const incorrectas = shuffle(pool).slice(0, 2);
+            return shuffle([correcta, ...incorrectas]);
+        }
+
+        function mostrarPregunta() {
+            const pregunta = preguntas[indice];
+            const { item, tipo } = pregunta;
+
+            document.getElementById("juego-progreso").textContent =
+                `Pregunta ${indice + 1} de ${TOTAL}`;
+
+            const enunciado = tipo === 1
+                ? `¿Cuál es la capital de <em>${item.provincia}</em>?`
+                : `¿A qué provincia pertenece la capital <em>${item.capital}</em>?`;
+            document.getElementById("juego-enunciado").innerHTML = enunciado;
+
+            const correcta = tipo === 1 ? item.capital : item.provincia;
+            const opciones = generarOpciones(pregunta);
+
+            const contenedor = document.getElementById("juego-opciones");
+            contenedor.innerHTML = "";
+            opciones.forEach(op => {
+                const btn = document.createElement("button");
+                btn.className = "juego-opcion";
+                btn.textContent = op;
+                btn.addEventListener("click", () => responder(op, correcta, pregunta));
+                contenedor.appendChild(btn);
+            });
+
+            document.getElementById("btn-siguiente-juego").style.display = "none";
+        }
+
+        function responder(seleccion, correcta, pregunta) {
+            // Deshabilitar todas las opciones
+            document.querySelectorAll(".juego-opcion").forEach(btn => {
+                btn.disabled = true;
+                if (btn.textContent === correcta) {
+                    btn.classList.add("correcta");
+                } else if (btn.textContent === seleccion) {
+                    btn.classList.add("incorrecta");
+                }
+            });
+
+            if (seleccion === correcta) {
+                puntaje++;
+            } else {
+                const { item, tipo } = pregunta;
+                errores.push({
+                    pregunta: tipo === 1
+                        ? `Capital de ${item.provincia}`
+                        : `Provincia de la capital ${item.capital}`,
+                    dada: seleccion,
+                    correcta
+                });
+            }
+
+            document.getElementById("btn-siguiente-juego").style.display = "inline-block";
+        }
+
+        function mostrarResultados() {
+            document.getElementById("juego-pregunta-area").style.display = "none";
+            document.getElementById("juego-resultados").style.display = "block";
+
+            document.getElementById("resultado-puntaje").textContent = `${puntaje} / ${TOTAL}`;
+            const porc = Math.round((puntaje / TOTAL) * 100);
+            let emoji = porc === 100 ? "🏆" : porc >= 70 ? "🎉" : porc >= 40 ? "💪" : "📚";
+            document.getElementById("resultado-label").textContent =
+                `${emoji} ${porc}% — ${porc === 100 ? "¡Perfecto!" : porc >= 70 ? "¡Muy bien!" : porc >= 40 ? "¡Sigue practicando!" : "¡A estudiar más!"}`;
+
+            const listaEl = document.getElementById("errores-lista");
+            listaEl.innerHTML = "";
+            if (errores.length > 0) {
+                const titulo = document.createElement("div");
+                titulo.className = "errores-titulo";
+                titulo.textContent = `❌ Errores (${errores.length})`;
+                listaEl.appendChild(titulo);
+
+                errores.forEach(e => {
+                    const div = document.createElement("div");
+                    div.className = "error-item";
+                    div.innerHTML = `
+                        <strong>${e.pregunta}</strong><br>
+                        Respondiste: <span class="error-dada">${e.dada}</span><br>
+                        Correcto: <span class="error-correcta">${e.correcta}</span>
+                    `;
+                    listaEl.appendChild(div);
+                });
+            } else {
+                listaEl.innerHTML = '<p style="text-align:center; color:#28a745; font-weight:bold;">¡Sin errores! 🌟</p>';
+            }
+        }
+
+        function iniciarJuego() {
+            modo = parseInt(document.getElementById("modoJuego").value);
+            preguntas = generarPreguntas(modo);
+            indice = 0;
+            puntaje = 0;
+            errores = [];
+
+            document.getElementById("juego-inicio").style.display = "none";
+            document.getElementById("juego-resultados").style.display = "none";
+            document.getElementById("juego-pregunta-area").style.display = "block";
+
+            mostrarPregunta();
+        }
+
+        document.getElementById("btn-empezar").addEventListener("click", iniciarJuego);
+
+        document.getElementById("btn-siguiente-juego").addEventListener("click", () => {
+            indice++;
+            if (indice < TOTAL) {
+                mostrarPregunta();
+            } else {
+                mostrarResultados();
+            }
+        });
+
+        document.getElementById("btn-rejugar").addEventListener("click", () => {
+            document.getElementById("juego-resultados").style.display = "none";
+            document.getElementById("juego-inicio").style.display = "block";
+        });
+    })();
+    </script>
 </body>
 </html>
 
