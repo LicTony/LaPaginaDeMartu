@@ -394,6 +394,31 @@
             </div>
         </div>
 
+        <!-- Panel conversor -->
+        <div class="panel tabla-container" style="flex: 0 0 auto;">
+            <div class="juego" style="padding: 15px;">
+                <h2 style="color: #8787FF; margin-bottom: 15px; font-size: 1.3rem;">Conversor</h2>
+                
+                <div style="margin-bottom: 25px;">
+                    <p style="color: #8787FF; margin-bottom: 8px; font-size: 1rem;">Número → Romano:</p>
+                    <input type="number" id="input-numero" min="1" max="3000" 
+                           placeholder="1-3000" 
+                           style="width: 100%; padding: 15px 12px; font-size: 1.3rem; text-align: center; border-radius: 8px; background: #fff0f5; color: #8787FF; border: 2px solid #B19CD9;"
+                           oninput="convertirARomano()">
+                    <p id="resultado-romano" style="color: #8787FF; font-size: 1.6rem; font-weight: bold; margin-top: 10px; min-height: 36px; padding: 10px; background: rgba(255,255,255,0.5); border-radius: 6px;"></p>
+                </div>
+                
+                <div>
+                    <p style="color: #8787FF; margin-bottom: 8px; font-size: 1rem;">Romano → Número:</p>
+                    <input type="text" id="input-romano" 
+                           placeholder="I - MMM" 
+                           style="width: 100%; padding: 15px 12px; font-size: 1.3rem; text-align: center; border-radius: 8px; background: #fff0f5; color: #8787FF; border: 2px solid #B19CD9; text-transform: uppercase;"
+                           oninput="convertirANumero()">
+                    <p id="resultado-numero" style="color: #8787FF; font-size: 1.6rem; font-weight: bold; margin-top: 10px; min-height: 36px; padding: 10px; background: rgba(255,255,255,0.5); border-radius: 6px;"></p>
+                </div>
+            </div>
+        </div>
+
         <!-- Panel derecho: Juego -->
         <div class="panel juego-container" id="juego-section">
             <div class="juego">
@@ -496,6 +521,126 @@
                 }
             }
             return romano;
+        }
+
+        // Función del conversor: Número a Romano
+        function convertirARomano() {
+            const input = document.getElementById('input-numero');
+            const resultado = document.getElementById('resultado-romano');
+            const valor = parseInt(input.value);
+
+            if (isNaN(valor) || valor < 1) {
+                resultado.textContent = '';
+                return;
+            }
+            if (valor > 3000) {
+                resultado.textContent = 'Máx 3000';
+                return;
+            }
+            resultado.textContent = aRomano(valor);
+        }
+
+        // Función del conversor: Romano a Número
+        function convertirANumero() {
+            const input = document.getElementById('input-romano');
+            const resultado = document.getElementById('resultado-numero');
+            const romano = input.value.trim().toUpperCase();
+
+            if (romano === '') {
+                resultado.textContent = '';
+                return;
+            }
+
+            const valor = desdeRomano(romano);
+            if (valor === null || valor > 3000) {
+                resultado.textContent = 'Inválido';
+                return;
+            }
+            resultado.textContent = valor;
+        }
+
+        // Función para convertir romano a número con validación correcta
+        // Solo acepta formato canónico (validado con aRomano)
+        function desdeRomano(romano) {
+            const valores = {
+                'I': 1, 'V': 5, 'X': 10, 'L': 50,
+                'C': 100, 'D': 500, 'M': 1000
+            };
+            
+            // Validar caracteres válidos
+            for (let char of romano) {
+                if (!valores.hasOwnProperty(char)) {
+                    return null;
+                }
+            }
+
+            // VALIDACIÓN 1: No más de 3 símbolos consecutivos
+            const noRepetibles = ['V', 'L', 'D'];
+            let consecutivos = 1;
+            
+            for (let i = 1; i < romano.length; i++) {
+                if (romano[i] === romano[i - 1]) {
+                    consecutivos++;
+                } else {
+                    consecutivos = 1;
+                }
+                
+                if (noRepetibles.includes(romano[i]) && consecutivos >= 2) {
+                    return null;
+                }
+                if (consecutivos > 3) {
+                    return null;
+                }
+            }
+
+            // VALIDACIÓN 2: Regla sustractiva - solo IV, IX, XL, XC, CD, CM son válidos
+            const sustractivos = {
+                'I': ['V', 'X'],
+                'X': ['L', 'C'],
+                'C': ['D', 'M']
+            };
+            
+            for (let i = 0; i < romano.length - 1; i++) {
+                const actual = romano[i];
+                const siguiente = romano[i + 1];
+                const valorActual = valores[actual];
+                const valorSiguiente = valores[siguiente];
+                
+                if (valorActual < valorSiguiente) {
+                    if (!sustractivos[actual] || !sustractivos[actual].includes(siguiente)) {
+                        return null;
+                    }
+                }
+            }
+
+            // VALIDACIÓN 3: SOLO formato canónico (esto es lo clave)
+            // Convertir de vuelta con aRomano debe DAR EXACTAMENTE el mismo string
+            let total = 0;
+            let i = 0;
+            
+            while (i < romano.length) {
+                const actual = valores[romano[i]];
+                const siguiente = i + 1 < romano.length ? valores[romano[i + 1]] : 0;
+                
+                if (actual < siguiente) {
+                    total -= actual;
+                } else {
+                    total += actual;
+                }
+                i++;
+            }
+
+            // Esta es la validación clave que faltaba
+            if (total < 1 || total > 3000) {
+                return null;
+            }
+            
+            const verificacion = aRomano(total);
+            if (verificacion !== romano) {
+                return null; // Formato no canónico, rechazarlo
+            }
+            
+            return total;
         }
 
         // Números romanos base
