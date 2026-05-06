@@ -32,6 +32,34 @@
     color: var(--dark);
   }
 
+  /* HEADER CONTAINER */
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .btn-volver {
+    padding: 10px 20px;
+    background: rgba(255,255,255,0.3);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    border: 2px solid rgba(255,255,255,0.5);
+    transition: all 0.2s;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  }
+
+  .btn-volver:hover {
+    background: rgba(255,255,255,0.5);
+    transform: translateY(-2px);
+  }
+
   /* HEADER */
   header {
     background: linear-gradient(135deg, var(--pink), var(--purple));
@@ -480,6 +508,13 @@
     .mc-options { grid-template-columns: 1fr; }
     .match-cols { grid-template-columns: 1fr; }
     .vocab-grid { grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); }
+    .header-container {
+      flex-direction: column;
+      gap: 12px;
+    }
+    .btn-volver {
+      align-self: flex-start;
+    }
   }
 </style>
 </head>
@@ -488,8 +523,14 @@
 <div class="confetti-container" id="confettiContainer"></div>
 
 <header>
-  <h1>🌸 Aprendendo Português! 🌸</h1>
-  <p>¡Vamos aprender juntas! 💖</p>
+  <div class="header-container">
+    <a href="index.html" class="btn-volver">← Menú</a>
+    <div>
+      <h1>🌸 Aprendendo Português! 🌸</h1>
+      <p>¡Vamos aprender juntas! 💖</p>
+    </div>
+    <div style="width: 80px;"></div>
+  </div>
 </header>
 
 <nav>
