@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌟 Aprendo Portugués! 🌟</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #FF6B9D;
+    --purple: #C77DFF;
+    --blue: #74B9FF;
+    --yellow: #FFE066;
+    --green: #55EFC4;
+    --orange: #FFA502;
+    --red: #FF4757;
+    --white: #FFFDF7;
+    --dark: #2D2D44;
+    --bg: #FFF0F8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 10% 20%, rgba(255,107,157,0.15) 0%, transparent 40%),
+      radial-gradient(circle at 90% 80%, rgba(199,125,255,0.15) 0%, transparent 40%),
+      radial-gradient(circle at 50% 50%, rgba(116,185,255,0.1) 0%, transparent 60%);
+    min-height: 100vh;
+    color: var(--dark);
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    padding: 18px 20px 14px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(255,107,157,0.4);
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '⭐✨🌸💖⭐✨🌸💖⭐✨🌸💖⭐✨🌸💖⭐✨🌸💖';
+    position: absolute; top: 4px; left: 0; right: 0;
+    font-size: 12px; letter-spacing: 2px; opacity: 0.6;
+  }
+  header h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    color: white;
+    text-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+    letter-spacing: 1px;
+  }
+  header p { color: rgba(255,255,255,0.9); font-size: 1rem; font-weight: 700; margin-top: 4px; }
+
+  /* NAV */
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 18px 16px;
+    background: white;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  nav button {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.9rem;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+  }
+  nav button:hover { transform: translateY(-2px); box-shadow: 0 5px 0 rgba(0,0,0,0.2); }
+  nav button:active { transform: translateY(1px); box-shadow: 0 2px 0 rgba(0,0,0,0.2); }
+  .nav-1 { background: var(--pink); color: white; }
+  .nav-2 { background: var(--purple); color: white; }
+  .nav-3 { background: var(--blue); color: white; }
+  nav button.active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0,0,0,0.2); outline: 3px solid var(--dark); }
+
+  /* MAIN */
+  main { max-width: 900px; margin: 0 auto; padding: 20px 16px 40px; }
+
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* SECTION HEADER */
+  .section-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 6px;
+    color: var(--dark);
+  }
+  .section-sub {
+    text-align: center;
+    color: #666;
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+  }
+
+  /* DIFFICULTY TABS */
+  .difficulty-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .diff-btn {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+    padding: 8px 20px;
+    border: 3px solid transparent;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: white;
+  }
+  .diff-btn.easy { border-color: var(--green); color: #00a882; }
+  .diff-btn.medium { border-color: var(--orange); color: #d48000; }
+  .diff-btn.hard { border-color: var(--red); color: #d40000; }
+  .diff-btn.active.easy { background: var(--green); color: white; }
+  .diff-btn.active.medium { background: var(--orange); color: white; }
+  .diff-btn.active.hard { background: var(--red); color: white; }
+
+  /* CARDS GRID */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .vocab-card {
+    background: white;
+    border-radius: 16px;
+    padding: 14px 10px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border: 3px solid transparent;
+    transition: all 0.2s;
+    cursor: default;
+  }
+  .vocab-card:hover { transform: scale(1.05); }
+  .vocab-card img { width: 70px; height: 70px; object-fit: contain; display: block; margin: 0 auto 8px; }
+  .vocab-card .pt { font-weight: 800; font-size: 0.9rem; color: var(--dark); }
+  .vocab-card .es { font-size: 0.78rem; color: #888; font-weight: 600; }
+
+  /* ACTIVITY CARD */
+  .activity-card {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+  }
+  .activity-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--dark);
+  }
+
+  /* MATCHING */
+  .match-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .match-item {
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 3px solid #eee;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    background: #f9f9f9;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .match-item:hover { border-color: var(--purple); background: #f3eeff; }
+  .match-item.selected { border-color: var(--pink); background: #fff0f8; box-shadow: 0 0 0 2px var(--pink); }
+  .match-item.correct { border-color: var(--green); background: #effffa; }
+  .match-item.wrong { border-color: var(--red); background: #fff0f0; }
+
+  /* FILL IN THE BLANK */
+  .blank-question {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.7;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .blank-input {
+    display: inline-block;
+    width: 120px;
+    padding: 4px 8px;
+    border: 3px dashed var(--purple);
+    border-radius: 8px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    text-align: center;
+    outline: none;
+    background: #f9f0ff;
+    color: var(--dark);
+    transition: border-color 0.2s;
+  }
+  .blank-input:focus { border-color: var(--pink); background: #fff0f8; }
+  .blank-input.correct { border-color: var(--green); background: #effffa; border-style: solid; }
+  .blank-input.wrong { border-color: var(--red); background: #fff0f0; border-style: solid; }
+
+  /* MULTIPLE CHOICE */
+  .mc-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .mc-btn {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 12px 10px;
+    border: 3px solid #ddd;
+    border-radius: 14px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+  .mc-btn:hover { border-color: var(--blue); background: #f0f7ff; }
+  .mc-btn.selected { border-color: var(--purple); background: #f3eeff; }
+  .mc-btn.correct { border-color: var(--green) !important; background: #effffa !important; }
+  .mc-btn.wrong { border-color: var(--red) !important; background: #fff0f0 !important; }
+  .mc-btn.show-correct { border-color: var(--green); background: #effffa; }
+  .mc-question { font-size: 1.1rem; font-weight: 800; text-align: center; }
+  .mc-img { width: 70px; height: 70px; object-fit: contain; display: block; margin: 0 auto 10px; }
+  .inline-img { width: 40px; height: 40px; object-fit: contain; vertical-align: middle; }
+
+  /* BUTTONS */
+  .btn-check {
+    display: block;
+    margin: 22px auto 0;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    padding: 13px 36px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    color: white;
+    box-shadow: 0 5px 0 rgba(180,50,120,0.4);
+    letter-spacing: 0.5px;
+  }
+  .btn-check:hover { transform: translateY(-2px); box-shadow: 0 7px 0 rgba(180,50,120,0.4); }
+  .btn-check:active { transform: translateY(2px); box-shadow: 0 3px 0 rgba(180,50,120,0.4); }
+
+  .btn-retry {
+    display: block;
+    margin: 10px auto 0;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    padding: 10px 28px;
+    border: 3px solid var(--orange);
+    border-radius: 50px;
+    cursor: pointer;
+    background: white;
+    color: var(--orange);
+    transition: all 0.2s;
+  }
+  .btn-retry:hover { background: var(--orange); color: white; }
+
+  /* RESULT BANNER */
+  .result-banner {
+    display: none;
+    margin-top: 18px;
+    padding: 18px 20px;
+    border-radius: 16px;
+    text-align: center;
+    animation: popIn 0.4s cubic-bezier(.34,1.56,.64,1);
+  }
+  @keyframes popIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .result-banner.success {
+    background: linear-gradient(135deg, #d4faea, #a8ffd4);
+    border: 3px solid var(--green);
+  }
+  .result-banner.fail {
+    background: linear-gradient(135deg, #ffe0ee, #ffd4e8);
+    border: 3px solid var(--pink);
+  }
+  .result-banner .big-emoji { font-size: 2.5rem; display: block; margin-bottom: 6px; }
+  .result-banner .msg { font-weight: 800; font-size: 1.1rem; }
+  .result-banner .score { font-size: 0.95rem; color: #555; margin-top: 4px; }
+
+  /* ANSWER KEY */
+  .answer-key {
+    display: none;
+    margin-top: 14px;
+    background: #fffde7;
+    border: 2px dashed var(--yellow);
+    border-radius: 14px;
+    padding: 14px 18px;
+  }
+  .answer-key h4 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: #b8860b;
+  }
+  .answer-key p { font-size: 0.9rem; font-weight: 600; color: #555; line-height: 1.8; }
+
+  /* VERB TABLE */
+  .verb-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0 20px;
+    font-size: 0.95rem;
+  }
+  .verb-table th {
+    background: linear-gradient(135deg, var(--purple), var(--pink));
+    color: white;
+    padding: 10px 14px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    text-align: left;
+  }
+  .verb-table td {
+    padding: 10px 14px;
+    border-bottom: 2px solid #f0e6ff;
+    font-weight: 700;
+  }
+  .verb-table tr:nth-child(even) td { background: #faf5ff; }
+  .verb-table .pronoun { color: var(--purple); }
+  .verb-table .verb { color: var(--pink); font-size: 1.05rem; }
+
+  /* POSSESSIVE TABLE */
+  .poss-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0 20px;
+  }
+  .poss-table th {
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    color: white;
+    padding: 10px 14px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    text-align: center;
+  }
+  .poss-table td {
+    padding: 10px 14px;
+    border-bottom: 2px solid #e6f0ff;
+    font-weight: 700;
+    text-align: center;
+  }
+  .poss-table tr:nth-child(even) td { background: #f0f7ff; }
+  .poss-table .key-word { color: var(--blue); font-size: 1.05rem; }
+
+  /* PROGRESS STARS */
+  .stars-bar {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  .star { font-size: 1.6rem; filter: grayscale(1) opacity(0.3); transition: all 0.3s; }
+  .star.lit { filter: none; animation: starPop 0.4s ease; }
+  @keyframes starPop {
+    0% { transform: scale(0); }
+    70% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+  }
+
+  /* DRAG & DROP */
+  .drag-bank {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 14px;
+    background: #f5f0ff;
+    border-radius: 14px;
+    border: 2px dashed var(--purple);
+    margin-bottom: 16px;
+    min-height: 52px;
+  }
+  .drag-chip {
+    padding: 8px 16px;
+    background: white;
+    border: 2.5px solid var(--purple);
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    cursor: grab;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .drag-chip:hover { background: var(--purple); color: white; }
+  .drag-chip.dragging { opacity: 0.4; }
+
+  .drop-zone {
+    display: inline-block;
+    min-width: 100px;
+    min-height: 32px;
+    border-bottom: 3px dashed var(--purple);
+    margin: 0 6px;
+    vertical-align: bottom;
+    padding: 2px 8px;
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--purple);
+    text-align: center;
+    cursor: pointer;
+  }
+  .drop-zone.filled { border-style: solid; color: var(--dark); background: #f0e6ff; border-radius: 8px; }
+  .drop-zone.correct { border-color: var(--green); background: #effffa; color: #00a882; }
+  .drop-zone.wrong { border-color: var(--red); background: #fff0f0; color: var(--red); }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #f0e6ff; }
+  ::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 10px; }
+
+  .hidden { display: none; }
+
+  /* Confetti */
+  .confetti-container {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none; z-index: 9999;
+    overflow: hidden;
+  }
+  .confetti-piece {
+    position: absolute;
+    width: 12px; height: 12px;
+    top: -20px;
+    animation: confettiFall linear forwards;
+    border-radius: 2px;
+  }
+  @keyframes confettiFall {
+    to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* REFERENCE INFO BOX */
+  .info-box {
+    background: linear-gradient(135deg, #fff0f8, #f3eeff);
+    border: 3px solid var(--pink);
+    border-radius: 18px;
+    padding: 18px 20px;
+    margin-bottom: 22px;
+  }
+  .info-box h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+    color: var(--dark);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 500px) {
+    .mc-options { grid-template-columns: 1fr; }
+    .match-cols { grid-template-columns: 1fr; }
+    .vocab-grid { grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); }
+  }
+</style>
+</head>
+<body>
+
+<div class="confetti-container" id="confettiContainer"></div>
+
+<header>
+  <h1>🌸 Aprendendo Português! 🌸</h1>
+  <p>¡Vamos aprender juntas! 💖</p>
+</header>
+
+<nav>
+  <button class="nav-1 active" onclick="showSection('s1', this)">📚 Útiles Escolares</button>
+  <button class="nav-2" onclick="showSection('s2', this)">💬 Meu y Minha</button>
+  <button class="nav-3" onclick="showSection('s3', this)">⭐ Verbo SER</button>
+</nav>
+
+<main>
+
+<!-- ============ SECCIÓN 1: ÚTILES ESCOLARES ============ -->
+<div class="section active" id="s1">
+  <div class="section-title">📚 Útiles Escolares em Português</div>
+  <div class="section-sub">¡Primero aprendamos las palabras! 🎒</div>
+
+  <!-- Reference vocab -->
+  <div class="vocab-grid" id="vocabGrid"></div>
+
+  <!-- Difficulty tabs -->
+  <div class="difficulty-tabs">
+    <button class="diff-btn easy active" onclick="setDiff('s1','easy',this)">🟢 Fácil</button>
+    <button class="diff-btn medium" onclick="setDiff('s1','medium',this)">🟡 Médio</button>
+    <button class="diff-btn hard" onclick="setDiff('s1','hard',this)">🔴 Difícil</button>
+  </div>
+
+  <!-- EASY: Multiple choice -->
+  <div id="s1-easy" class="s1-diff">
+    <div class="activity-card">
+      <div class="activity-title">🖼️ ¿Cuál es en portugués?</div>
+      <div id="s1e-questions"></div>
+      <button class="btn-check" onclick="checkS1Easy()">✅ ¡Verificar!</button>
+      <button class="btn-retry" onclick="retryS1Easy()">🔄 Intentar de nuevo</button>
+      <div class="result-banner" id="s1e-result"></div>
+      <div class="answer-key" id="s1e-answers"></div>
+    </div>
+  </div>
+
+  <!-- MEDIUM: Fill in blanks -->
+  <div id="s1-medium" class="s1-diff hidden">
+    <div class="activity-card">
+      <div class="activity-title">✏️ Completá la frase</div>
+      <div id="s1m-questions"></div>
+      <button class="btn-check" onclick="checkS1Medium()">✅ ¡Verificar!</button>
+      <button class="btn-retry" onclick="retryS1Medium()">🔄 Intentar de nuevo</button>
+      <div class="result-banner" id="s1m-result"></div>
+      <div class="answer-key" id="s1m-answers"></div>
+    </div>
+  </div>
+
+  <!-- HARD: Matching + translate -->
+  <div id="s1-hard" class="s1-diff hidden">
+    <div class="activity-card">
+      <div class="activity-title">🧠 ¡Unir y escribir!</div>
+      <div id="s1h-questions"></div>
+      <button class="btn-check" onclick="checkS1Hard()">✅ ¡Verificar!</button>
+      <button class="btn-retry" onclick="retryS1Hard()">🔄 Intentar de nuevo</button>
+      <div class="result-banner" id="s1h-result"></div>
+      <div class="answer-key" id="s1h-answers"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SECCIÓN 2: MEU / MINHA ============ -->
+<div class="section" id="s2">
+  <div class="section-title">💬 Meu e Minha</div>
+  <div class="section-sub">¿Cuándo usar MEU y cuándo usar MINHA? 🤔</div>
+
+  <div class="info-box">
+    <h3>📖 Regla fácil:</h3>
+    <table class="poss-table">
+      <tr><th>Palabra</th><th>Uso</th><th>Ejemplo</th></tr>
+      <tr><td class="key-word">MEU</td><td>🔵 Masculino</td><td><em>meu lápis</em> (mi lápiz)</td></tr>
+      <tr><td class="key-word">MINHA</td><td>🔴 Femenino</td><td><em>minha borracha</em> (mi goma)</td></tr>
+    </table>
+    <p style="font-size:0.9rem; color:#666; font-weight:600;">💡 ¡En portugués, el género es igual al español en casi todos los útiles!</p>
+  </div>
+
+  <div class="difficulty-tabs">
+    <button class="diff-btn easy active" onclick="setDiff('s2','easy',this)">🟢 Fácil</button>
+    <button class="diff-btn medium" onclick="setDiff('s2','medium',this)">🟡 Médio</button>
+    <button class="diff-btn hard" onclick="setDiff('s2','hard',this)">🔴 Difícil</button>
+  </div>
+
+  <div id="s2-easy" class="s2-diff">
+    <div class="activity-card">
+      <div class="activity-title">🎯 ¿Meu o Minha?</div>
+      <div id="s2e-questions"></div>
+      <button class="btn-check" onclick="checkS2Easy()">✅ ¡Verificar!</button>
+      <button class="btn-retry" onclick="retryS2Easy()">🔄 Intentar de nuevo</button>
+      <div class="result-banner" id="s2e-result"></div>
+      <div class="answer-key" id="s2e-answers"></div>
+    </div>
+  </div>
+
+  <div id="s2-medium" class="s2-diff hidden">
+    <div class="activity-card">
+      <div class="activity-title">✏️ Completá con MEU o MINHA</div>
+      <div id="s2m-questions"></div>
+      <button class="btn-check" onclick="checkS2Medium()">✅ ¡Verificar!</button>
+      <button class="btn-retry" onclick="retryS2Medium()">🔄 Intentar de nuevo</button>
+      <div class="result-banner" id="s2m-result"></div>
+      <div class="answer-key" id="s2m-answers"></div>
+    </div>
+  </div>
+
+  <div id="s2-hard" class="s2-diff hidden">
+    <div class="activity-card">
+      <div class="activity-title">🧠 ¡Traducí la frase completa!</div>
+      <div id="s2h-questions"></div>
+      <button class="btn-check" onclick="checkS2Hard()">✅ ¡Verificar!</button>
+      <button class="btn-retry" onclick="retryS2Hard()">🔄 Intentar de nuevo</button>
+      <div class="result-banner" id="s2h-result"></div>
+      <div class="answer-key" id="s2h-answers"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SECCIÓN 3: VERBO SER ============ -->
+<div class="section" id="s3">
+  <div class="section-title">⭐ Verbo SER em Português</div>
+  <div class="section-sub">¡Aprendamos a conjugar! 💫</div>
+
+  <div class="info-box">
+    <h3>📖 Conjugación del verbo SER:</h3>
+    <table class="verb-table">
+      <tr><th>Pronombre</th><th>Forma</th><th>Ejemplo</th></tr>
+      <tr><td class="pronoun">Eu</td><td class="verb">sou</td><td>Eu sou estudante.</td></tr>
+      <tr><td class="pronoun">Ele / Ela / Você</td><td class="verb">é</td><td>Ela é bonita.</td></tr>
+      <tr><td class="pronoun">Nós</td><td class="verb">somos</td><td>Nós somos amigos.</td></tr>
+      <tr><td class="pronoun">Eles / Elas / Vocês</td><td class="verb">são</td><td>Eles são alunos.</td></tr>
+    </table>
+  </div>
+
+  <div class="difficulty-tabs">
+    <button class="diff-btn easy active" onclick="setDiff('s3','easy',this)">🟢 Fácil</button>
+    <button class="diff-btn medium" onclick="setDiff('s3','medium',this)">🟡 Médio</button>
+    <button class="diff-btn hard" onclick="setDiff('s3','hard',this)">🔴 Difícil</button>
+  </div>
+
+  <div id="s3-easy" class="s3-diff">
+    <div class="activity-card">
+      <div class="activity-title">🎯 ¿Qué forma del verbo SER es?</div>
+      <div id="s3e-questions"></div>
+      <button class="btn-check" onclick="checkS3Easy()">✅ ¡Verificar!</button>
+      <button class="btn-retry" onclick="retryS3Easy()">🔄 Intentar de nuevo</button>
+      <div class="result-banner" id="s3e-result"></div>
+      <div class="answer-key" id="s3e-answers"></div>
+    </div>
+  </div>
+
+  <div id="s3-medium" class="s3-diff hidden">
+    <div class="activity-card">
+      <div class="activity-title">✏️ Completá con SOU / É / SOMOS / SÃO</div>
+      <div id="s3m-questions"></div>
+      <button class="btn-check" onclick="checkS3Medium()">✅ ¡Verificar!</button>
+      <button class="btn-retry" onclick="retryS3Medium()">🔄 Intentar de nuevo</button>
+      <div class="result-banner" id="s3m-result"></div>
+      <div class="answer-key" id="s3m-answers"></div>
+    </div>
+  </div>
+
+  <div id="s3-hard" class="s3-diff hidden">
+    <div class="activity-card">
+      <div class="activity-title">🧠 ¡Traducí a Portugués!</div>
+      <div id="s3h-questions"></div>
+      <button class="btn-check" onclick="checkS3Hard()">✅ ¡Verificar!</button>
+      <button class="btn-retry" onclick="retryS3Hard()">🔄 Intentar de nuevo</button>
+      <div class="result-banner" id="s3h-result"></div>
+      <div class="answer-key" id="s3h-answers"></div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ===== DATA =====
+const vocab = [
+  { pt: 'lápis', es: 'lápiz', img: 'portugues/lapiz.webp', gen: 'm' },
+  { pt: 'borracha', es: 'goma', img: 'portugues/goma.webp', gen: 'f' },
+  { pt: 'régua', es: 'regla', img: 'portugues/regla.webp', gen: 'f' },
+  { pt: 'caneta', es: 'lapicera', img: 'portugues/lapicera.webp', gen: 'f' },
+  { pt: 'tesoura', es: 'tijera', img: 'portugues/tijera.webp', gen: 'f' },
+  { pt: 'mochila', es: 'mochila', img: 'portugues/mochila.webp', gen: 'f' },
+  { pt: 'caderno', es: 'cuaderno', img: 'portugues/cuaderno.webp', gen: 'm' },
+  { pt: 'quadro-negro', es: 'pizarrón', img: 'portugues/pizarron.webp', gen: 'm' },
+  { pt: 'apontador', es: 'sacapuntas', img: 'portugues/sacapuntas.webp', gen: 'm' },
+  { pt: 'cola', es: 'pegamento', img: 'portugues/pegamento.webp', gen: 'f' },
+  { pt: 'estojo', es: 'estuche', img: 'portugues/cartuchera.webp', gen: 'm' },
+  { pt: 'compasso', es: 'compás', img: 'portugues/compas.webp', gen: 'm' },
+  { pt: 'livro', es: 'libro', img: 'portugues/libro.webp', gen: 'm' },
+  { pt: 'pincel', es: 'pincel', img: 'portugues/pincel.webp', gen: 'm' },
+  { pt: 'apagador', es: 'borrador', img: 'portugues/borrador.webp', gen: 'm' },
+];
+
+// ===== RENDER VOCAB CARDS =====
+const grid = document.getElementById('vocabGrid');
+const cardColors = ['#FFE0EE','#F0E6FF','#E0F0FF','#E0FFF5','#FFF0D4','#FFF0E0'];
+vocab.forEach((v, i) => {
+  const c = document.createElement('div');
+  c.className = 'vocab-card';
+  c.style.borderColor = cardColors[i % cardColors.length];
+  c.style.background = cardColors[i % cardColors.length];
+  c.innerHTML = `<img src="${v.img}" alt="${v.pt}"><div class="pt">${v.pt}</div><div class="es">${v.es}</div>`;
+  grid.appendChild(c);
+});
+
+// ===== HELPERS =====
+function shuffle(arr) { return [...arr].sort(() => Math.random() - 0.5); }
+function getRandom(arr, n) { return shuffle(arr).slice(0, n); }
+
+function showResult(id, correct, total) {
+  const el = document.getElementById(id);
+  el.style.display = 'block';
+  const pct = Math.round((correct / total) * 100);
+  if (pct >= 80) {
+    el.className = 'result-banner success';
+    const msgs = ['¡Fantástico! 🌟', '¡Eres una crack! 🏆', '¡Excelente! ¡Muy bien!', '¡Increíble trabajo!'];
+    el.innerHTML = `<span class="big-emoji">🎉🌸💖</span>
+      <div class="msg">${msgs[Math.floor(Math.random()*msgs.length)]}</div>
+      <div class="score">Acertaste ${correct} de ${total} (${pct}%) ✅</div>`;
+    if (pct === 100) launchConfetti();
+  } else {
+    el.className = 'result-banner fail';
+    const msgs = ['¡Casi! Inténtalo de nuevo 💪', '¡Sigue practicando, vas muy bien! 🌺', '¡No te rindas, tú puedes! 🦋', '¡Un poco más de práctica! 📖'];
+    el.innerHTML = `<span class="big-emoji">🤗💕</span>
+      <div class="msg">${msgs[Math.floor(Math.random()*msgs.length)]}</div>
+      <div class="score">Acertaste ${correct} de ${total} (${pct}%) — ¡revisa las respuestas abajo! 👇</div>`;
+  }
+}
+
+function showAnswerKey(id, html) {
+  const el = document.getElementById(id);
+  el.style.display = 'block';
+  el.innerHTML = `<h4>🗝️ Respuestas correctas:</h4><p>${html}</p>`;
+}
+
+function resetResult(rid, aid) {
+  const r = document.getElementById(rid);
+  const a = document.getElementById(aid);
+  if (r) r.style.display = 'none';
+  if (a) a.style.display = 'none';
+}
+
+// Confetti
+function launchConfetti() {
+  const container = document.getElementById('confettiContainer');
+  container.innerHTML = '';
+  const colors = ['#FF6B9D','#C77DFF','#74B9FF','#FFE066','#55EFC4','#FFA502'];
+  for (let i = 0; i < 80; i++) {
+    const p = document.createElement('div');
+    p.className = 'confetti-piece';
+    p.style.cssText = `left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};
+      animation-duration:${1.5+Math.random()*2}s;animation-delay:${Math.random()*0.8}s;
+      width:${8+Math.random()*10}px;height:${8+Math.random()*10}px;
+      border-radius:${Math.random()>0.5?'50%':'2px'}`;
+    container.appendChild(p);
+  }
+  setTimeout(() => container.innerHTML = '', 4000);
+}
+
+// ===== SECTION NAV =====
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function setDiff(sec, diff, btn) {
+  document.querySelectorAll(`.${sec}-diff`).forEach(d => d.classList.add('hidden'));
+  document.getElementById(`${sec}-${diff}`).classList.remove('hidden');
+  document.querySelectorAll(`#${sec} .diff-btn`).forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// =============================================
+// SECCIÓN 1 - ÚTILES ESCOLARES
+// =============================================
+
+// --- EASY: multiple choice (5 questions) ---
+let s1eData = [];
+function buildS1Easy() {
+  resetResult('s1e-result','s1e-answers');
+  const qs = getRandom(vocab, 5);
+  s1eData = qs.map(q => {
+    const wrong = shuffle(vocab.filter(v => v.pt !== q.pt)).slice(0,3);
+    const opts = shuffle([q, ...wrong]);
+    return { q, opts, selected: null };
+  });
+  const container = document.getElementById('s1e-questions');
+  container.innerHTML = '';
+  qs.forEach((q, i) => {
+    const opts = s1eData[i].opts;
+    const div = document.createElement('div');
+    div.style.marginBottom = '22px';
+    div.innerHTML = `<div class="mc-question"><img src="${q.img}" class="mc-img">${q.es}</div>
+      <div class="mc-options" id="s1e-opts-${i}">
+        ${opts.map((o,j) => `<button class="mc-btn" onclick="pickMC('s1e',${i},${j})" id="s1e-opt-${i}-${j}">${o.pt}</button>`).join('')}
+      </div>`;
+    container.appendChild(div);
+  });
+}
+function pickMC(prefix, qi, oi) {
+  const data = prefix === 's1e' ? s1eData : prefix === 's3e' ? s3eData : null;
+  if (!data) return;
+  data[qi].selected = oi;
+  const opts = document.getElementById(`${prefix}-opts-${qi}`).querySelectorAll('.mc-btn');
+  opts.forEach((b,j) => { b.classList.remove('selected'); if(j===oi) b.classList.add('selected'); });
+}
+function checkS1Easy() {
+  let correct = 0;
+  s1eData.forEach((item, i) => {
+    const opts = document.getElementById(`s1e-opts-${i}`).querySelectorAll('.mc-btn');
+    const correctIdx = item.opts.findIndex(o => o.pt === item.q.pt);
+    opts.forEach((b,j) => {
+      b.disabled = true;
+      if (j === correctIdx) b.classList.add('correct');
+      else if (j === item.selected) b.classList.add('wrong');
+    });
+    if (item.selected === correctIdx) correct++;
+  });
+  showResult('s1e-result', correct, s1eData.length);
+  const ansHtml = s1eData.map(d => `<img src="${d.q.img}" class="inline-img"> ${d.q.es} → <b>${d.q.pt}</b>`).join(' &nbsp;|&nbsp; ');
+  showAnswerKey('s1e-answers', ansHtml);
+}
+function retryS1Easy() { buildS1Easy(); }
+
+// --- MEDIUM: fill in the blank ---
+let s1mData = [];
+function buildS1Medium() {
+  resetResult('s1m-result','s1m-answers');
+  const qs = getRandom(vocab, 6);
+  s1mData = qs;
+  const container = document.getElementById('s1m-questions');
+  container.innerHTML = '';
+  qs.forEach((q, i) => {
+    const p = document.createElement('p');
+    p.className = 'blank-question';
+    p.style.marginBottom = '14px';
+    p.innerHTML = `<img src="${q.img}" class="inline-img"> En portugués, "${q.es}" se dice: <input type="text" class="blank-input" id="s1m-inp-${i}" placeholder="???" autocomplete="off">`;
+    container.appendChild(p);
+  });
+}
+function checkS1Medium() {
+  let correct = 0;
+  s1mData.forEach((q, i) => {
+    const inp = document.getElementById(`s1m-inp-${i}`);
+    const val = inp.value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    const ans = q.pt.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    inp.disabled = true;
+    if (val === ans) { inp.classList.add('correct'); correct++; }
+    else { inp.classList.add('wrong'); }
+  });
+  showResult('s1m-result', correct, s1mData.length);
+  const ansHtml = s1mData.map(q => `<img src="${q.img}" class="inline-img"> ${q.es} → <b>${q.pt}</b>`).join(' &nbsp;|&nbsp; ');
+  showAnswerKey('s1m-answers', ansHtml);
+}
+function retryS1Medium() { buildS1Medium(); }
+
+// --- HARD: match ES ↔ PT (drag-style click pairing) ---
+let s1hData = [], s1hSelected = null, s1hPairs = {};
+function buildS1Hard() {
+  resetResult('s1h-result','s1h-answers');
+  s1hSelected = null; s1hPairs = {};
+  const qs = getRandom(vocab, 8);
+  s1hData = qs;
+  const leftItems = shuffle(qs);
+  const rightItems = shuffle(qs);
+  const container = document.getElementById('s1h-questions');
+  container.innerHTML = `<p style="font-weight:700;color:#888;font-size:0.9rem;margin-bottom:12px;">Tocá una palabra de cada columna para unirlas 👆</p>`;
+  const grid = document.createElement('div');
+  grid.className = 'match-cols';
+  const leftCol = document.createElement('div');
+  const rightCol = document.createElement('div');
+  leftItems.forEach((q,i) => {
+    const d = document.createElement('div');
+    d.className = 'match-item'; d.dataset.side='left'; d.dataset.key=q.pt;
+    d.id = `s1h-L-${q.pt}`;
+    d.innerHTML = `<img src="${q.img}" class="inline-img"> ${q.es}`;
+    d.onclick = () => s1hClickItem(d);
+    leftCol.appendChild(d);
+  });
+  rightItems.forEach((q,i) => {
+    const d = document.createElement('div');
+    d.className = 'match-item'; d.dataset.side='right'; d.dataset.key=q.pt;
+    d.id = `s1h-R-${q.pt}`;
+    d.innerHTML = `${q.pt}`;
+    d.onclick = () => s1hClickItem(d);
+    rightCol.appendChild(d);
+  });
+  grid.appendChild(leftCol); grid.appendChild(rightCol);
+  container.appendChild(grid);
+  container.innerHTML += `<div id="s1h-pairs-display" style="margin-top:14px;font-size:0.85rem;font-weight:700;color:#888;display:flex;flex-wrap:wrap;gap:8px;"></div>`;
+}
+function s1hClickItem(el) {
+  if (el.classList.contains('correct') || el.classList.contains('wrong')) return;
+  if (!s1hSelected) {
+    document.querySelectorAll('#s1h-questions .match-item.selected').forEach(e => e.classList.remove('selected'));
+    el.classList.add('selected');
+    s1hSelected = el;
+  } else {
+    if (s1hSelected.dataset.side === el.dataset.side) {
+      s1hSelected.classList.remove('selected');
+      el.classList.add('selected');
+      s1hSelected = el;
+      return;
+    }
+    // pair them
+    const lEl = s1hSelected.dataset.side === 'left' ? s1hSelected : el;
+    const rEl = s1hSelected.dataset.side === 'right' ? s1hSelected : el;
+    s1hPairs[lEl.dataset.key] = rEl.dataset.key;
+    lEl.classList.remove('selected'); rEl.classList.remove('selected');
+    lEl.style.opacity = '0.6'; rEl.style.opacity = '0.6';
+    s1hSelected = null;
+    const d = document.getElementById('s1h-pairs-display');
+    d.innerHTML = Object.entries(s1hPairs).map(([k,v]) => {
+      const item = vocab.find(x => x.pt === k);
+      return `<div style="background:#fff;padding:4px 8px;border-radius:8px;border:1px solid #eee;">✅ ${item.pt} ↔ ${v}</div>`;
+    }).join('');
+    if (Object.keys(s1hPairs).length === s1hData.length) checkS1Hard();
+  }
+}
+function checkS1Hard() {
+  let correct = 0;
+  s1hData.forEach(q => {
+    const lEl = document.getElementById(`s1h-L-${q.pt}`);
+    const rEl = document.getElementById(`s1h-R-${q.pt}`);
+    const matched = s1hPairs[q.pt] === q.pt;
+    if (matched) { correct++; if(lEl) lEl.classList.add('correct'); if(rEl) rEl.classList.add('correct'); }
+    else { if(lEl) lEl.classList.add('wrong'); if(rEl) rEl.classList.add('wrong'); }
+  });
+  showResult('s1h-result', correct, s1hData.length);
+  const ansHtml = s1hData.map(q => `<img src="${q.img}" class="inline-img"> ${q.es} = <b>${q.pt}</b>`).join(' &nbsp;|&nbsp; ');
+  showAnswerKey('s1h-answers', ansHtml);
+}
+function retryS1Hard() { buildS1Hard(); }
+
+// =============================================
+// SECCIÓN 2 - MEU / MINHA
+// =============================================
+const meuMinhaData = vocab.map(v => ({
+  pt: v.pt, es: v.es, img: v.img,
+  possessive: v.gen === 'm' ? 'meu' : 'minha',
+  gen: v.gen
+}));
+
+// EASY: click meu/minha buttons
+let s2eData = [];
+function buildS2Easy() {
+  resetResult('s2e-result','s2e-answers');
+  const qs = getRandom(meuMinhaData, 6);
+  s2eData = qs.map(q => ({ ...q, selected: null }));
+  const container = document.getElementById('s2e-questions');
+  container.innerHTML = '';
+  qs.forEach((q,i) => {
+    const div = document.createElement('div');
+    div.style.cssText = 'margin-bottom:18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;';
+    div.innerHTML = `<img src="${q.img}" class="inline-img">
+      <span style="font-weight:800;font-size:1.05rem">${q.pt} <span style="color:#aaa;font-size:0.85rem">(${q.es})</span></span>
+      <button class="mc-btn" style="padding:8px 20px;" id="s2e-meu-${i}" onclick="s2ePick(${i},'meu')">MEU</button>
+      <button class="mc-btn" style="padding:8px 20px;" id="s2e-minha-${i}" onclick="s2ePick(${i},'minha')">MINHA</button>`;
+    container.appendChild(div);
+  });
+}
+function s2ePick(i, val) {
+  s2eData[i].selected = val;
+  ['meu','minha'].forEach(v => {
+    const b = document.getElementById(`s2e-${v}-${i}`);
+    b.classList.toggle('selected', v === val);
+  });
+}
+function checkS2Easy() {
+  let correct = 0;
+  s2eData.forEach((q,i) => {
+    ['meu','minha'].forEach(v => {
+      const b = document.getElementById(`s2e-${v}-${i}`);
+      b.disabled = true;
+      if (v === q.possessive) b.classList.add('correct');
+      else if (v === q.selected && v !== q.possessive) b.classList.add('wrong');
+    });
+    if (q.selected === q.possessive) correct++;
+  });
+  showResult('s2e-result', correct, s2eData.length);
+  const ansHtml = s2eData.map(q => `<img src="${q.img}" class="inline-img"> <b>${q.possessive} ${q.pt}</b>`).join(' &nbsp;|&nbsp; ');
+  showAnswerKey('s2e-answers', ansHtml);
+}
+function retryS2Easy() { buildS2Easy(); }
+
+// MEDIUM: fill in meu/minha
+let s2mData = [];
+function buildS2Medium() {
+  resetResult('s2m-result','s2m-answers');
+  const qs = getRandom(meuMinhaData, 6);
+  s2mData = qs;
+  const container = document.getElementById('s2m-questions');
+  container.innerHTML = '';
+  qs.forEach((q,i) => {
+    const p = document.createElement('p');
+    p.className = 'blank-question';
+    p.style.marginBottom = '14px';
+    p.innerHTML = `<img src="${q.img}" class="inline-img"> <input type="text" class="blank-input" id="s2m-inp-${i}" placeholder="meu/minha" autocomplete="off" style="width:90px"> ${q.pt} (${q.es})`;
+    container.appendChild(p);
+  });
+}
+function checkS2Medium() {
+  let correct = 0;
+  s2mData.forEach((q,i) => {
+    const inp = document.getElementById(`s2m-inp-${i}`);
+    const val = inp.value.trim().toLowerCase();
+    inp.disabled = true;
+    if (val === q.possessive) { inp.classList.add('correct'); correct++; }
+    else inp.classList.add('wrong');
+  });
+  showResult('s2m-result', correct, s2mData.length);
+  const ansHtml = s2mData.map(q => `<img src="${q.img}" class="inline-img"> → <b>${q.possessive} ${q.pt}</b>`).join(' &nbsp;|&nbsp; ');
+  showAnswerKey('s2m-answers', ansHtml);
+}
+function retryS2Medium() { buildS2Medium(); }
+
+// HARD: translate whole phrase "Mi lápiz" → "Meu lápis"
+let s2hData = [];
+const s2hPhrases = [
+  { es: 'Mi lápiz', pt: 'meu lápis' }, { es: 'Mi goma', pt: 'minha borracha' },
+  { es: 'Mi regla', pt: 'minha régua' }, { es: 'Mi lapicera', pt: 'minha caneta' },
+  { es: 'Mi tijera', pt: 'minha tesoura' }, { es: 'Mi mochila', pt: 'minha mochila' },
+  { es: 'Mi cuaderno', pt: 'meu caderno' }, { es: 'Mi pegamento', pt: 'minha cola' },
+  { es: 'Mi libro', pt: 'meu livro' }, { es: 'Mi pincel', pt: 'meu pincel' },
+  { es: 'Mi sacapuntas', pt: 'meu apontador' }, { es: 'Mi estuche', pt: 'meu estojo' },
+];
+function buildS2Hard() {
+  resetResult('s2h-result','s2h-answers');
+  s2hData = getRandom(s2hPhrases, 5);
+  const container = document.getElementById('s2h-questions');
+  container.innerHTML = '';
+  s2hData.forEach((q,i) => {
+    const p = document.createElement('p');
+    p.className = 'blank-question';
+    p.style.marginBottom = '14px';
+    p.innerHTML = `"${q.es}" → <input type="text" class="blank-input" id="s2h-inp-${i}" placeholder="???" autocomplete="off" style="width:150px">`;
+    container.appendChild(p);
+  });
+}
+function checkS2Hard() {
+  let correct = 0;
+  s2hData.forEach((q,i) => {
+    const inp = document.getElementById(`s2h-inp-${i}`);
+    const val = inp.value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    const ans = q.pt.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    inp.disabled = true;
+    if (val === ans) { inp.classList.add('correct'); correct++; }
+    else inp.classList.add('wrong');
+  });
+  showResult('s2h-result', correct, s2hData.length);
+  const ansHtml = s2hData.map(q => `"${q.es}" → <b>${q.pt}</b>`).join('<br>');
+  showAnswerKey('s2h-answers', ansHtml);
+}
+function retryS2Hard() { buildS2Hard(); }
+
+// =============================================
+// SECCIÓN 3 - VERBO SER
+// =============================================
+const verbData = [
+  { pronoun: 'Eu', verb: 'sou', example: 'Eu sou estudante.' },
+  { pronoun: 'Ele', verb: 'é', example: 'Ele é inteligente.' },
+  { pronoun: 'Ela', verb: 'é', example: 'Ela é bonita.' },
+  { pronoun: 'Você', verb: 'é', example: 'Você é meu amigo.' },
+  { pronoun: 'Nós', verb: 'somos', example: 'Nós somos colegas.' },
+  { pronoun: 'Eles', verb: 'são', example: 'Eles são alunos.' },
+  { pronoun: 'Elas', verb: 'são', example: 'Elas são professoras.' },
+  { pronoun: 'Vocês', verb: 'são', example: 'Vocês são legais.' },
+];
+
+// EASY: given pronoun, choose verb
+let s3eData = [];
+function buildS3Easy() {
+  resetResult('s3e-result','s3e-answers');
+  const qs = getRandom(verbData, 5);
+  s3eData = qs.map(q => {
+    const others = ['sou','é','somos','são'].filter(v => v !== q.verb);
+    const opts = shuffle([q.verb, ...getRandom(others, 2)]);
+    return { ...q, opts, selected: null };
+  });
+  const container = document.getElementById('s3e-questions');
+  container.innerHTML = '';
+  s3eData.forEach((q,i) => {
+    const div = document.createElement('div');
+    div.style.marginBottom = '22px';
+    div.innerHTML = `<div class="mc-question">⭐ <b>${q.pronoun}</b> ___ ...</div>
+      <div class="mc-options" id="s3e-opts-${i}">
+        ${q.opts.map((o,j) => `<button class="mc-btn" onclick="pickS3E(${i},${j})" id="s3e-opt-${i}-${j}">${o}</button>`).join('')}
+      </div>`;
+    container.appendChild(div);
+  });
+}
+function pickS3E(qi, oi) {
+  s3eData[qi].selected = oi;
+  const opts = document.getElementById(`s3e-opts-${qi}`).querySelectorAll('.mc-btn');
+  opts.forEach((b,j) => { b.classList.remove('selected'); if(j===oi) b.classList.add('selected'); });
+}
+function checkS3Easy() {
+  let correct = 0;
+  s3eData.forEach((q,i) => {
+    const opts = document.getElementById(`s3e-opts-${i}`).querySelectorAll('.mc-btn');
+    const ci = q.opts.indexOf(q.verb);
+    opts.forEach((b,j) => {
+      b.disabled = true;
+      if (j === ci) b.classList.add('correct');
+      else if (j === q.selected) b.classList.add('wrong');
+    });
+    if (q.selected === ci) correct++;
+  });
+  showResult('s3e-result', correct, s3eData.length);
+  const ansHtml = s3eData.map(q => `<b>${q.pronoun} ${q.verb}</b>`).join(' &nbsp;|&nbsp; ');
+  showAnswerKey('s3e-answers', ansHtml);
+}
+function retryS3Easy() { buildS3Easy(); }
+
+// MEDIUM: fill in the blank with verb
+let s3mData = [];
+const s3mSentences = [
+  { text: 'Eu ___ brasileira.', ans: 'sou', full: 'Eu sou brasileira.' },
+  { text: 'Ela ___ minha amiga.', ans: 'é', full: 'Ela é minha amiga.' },
+  { text: 'Nós ___ colegas de turma.', ans: 'somos', full: 'Nós somos colegas de turma.' },
+  { text: 'Eles ___ muito inteligentes.', ans: 'são', full: 'Eles são muito inteligentes.' },
+  { text: 'Você ___ muito simpática.', ans: 'é', full: 'Você é muito simpática.' },
+  { text: 'Elas ___ professoras.', ans: 'são', full: 'Elas são professoras.' },
+  { text: 'Eu ___ aluna nova.', ans: 'sou', full: 'Eu sou aluna nova.' },
+  { text: 'Vocês ___ irmãos?', ans: 'são', full: 'Vocês são irmãos?' },
+];
+function buildS3Medium() {
+  resetResult('s3m-result','s3m-answers');
+  s3mData = getRandom(s3mSentences, 5);
+  const container = document.getElementById('s3m-questions');
+  container.innerHTML = `<div style="margin-bottom:12px;padding:10px 14px;background:#f5f0ff;border-radius:12px;font-size:0.85rem;font-weight:700;color:#7c3aed;">
+    💡 Formas: <b>sou / é / somos / são</b>
+  </div>`;
+  s3mData.forEach((q,i) => {
+    const p = document.createElement('p');
+    p.className = 'blank-question';
+    p.style.marginBottom = '14px';
+    p.innerHTML = `⭐ ${q.text.replace('___', `<input type="text" class="blank-input" id="s3m-inp-${i}" placeholder="???" autocomplete="off" style="width:80px">`)}`;
+    container.appendChild(p);
+  });
+}
+function checkS3Medium() {
+  let correct = 0;
+  s3mData.forEach((q,i) => {
+    const inp = document.getElementById(`s3m-inp-${i}`);
+    const val = inp.value.trim().toLowerCase();
+    inp.disabled = true;
+    if (val === q.ans) { inp.classList.add('correct'); correct++; }
+    else inp.classList.add('wrong');
+  });
+  showResult('s3m-result', correct, s3mData.length);
+  const ansHtml = s3mData.map(q => `<b>${q.full}</b>`).join('<br>');
+  showAnswerKey('s3m-answers', ansHtml);
+}
+function retryS3Medium() { buildS3Medium(); }
+
+// HARD: translate sentences from Spanish to Portuguese
+let s3hData = [];
+const s3hSentences = [
+  { es: 'Yo soy estudiante.', pt: 'eu sou estudante' },
+  { es: 'Ella es mi amiga.', pt: 'ela é minha amiga' },
+  { es: 'Nosotros somos compañeros.', pt: 'nós somos colegas' },
+  { es: 'Ellos son alumnos.', pt: 'eles são alunos' },
+  { es: 'Usted es muy amable.', pt: 'você é muito gentil' },
+  { es: 'Ellas son profesoras.', pt: 'elas são professoras' },
+  { es: 'Yo soy nueva en la clase.', pt: 'eu sou nova na turma' },
+  { es: 'Ustedes son hermanos?', pt: 'vocês são irmãos' },
+];
+const s3hAccept = {
+  'eu sou estudante': ['eu sou estudante', 'eu sou aluna', 'sou estudante', 'sou aluna'],
+  'ela é minha amiga': ['ela é minha amiga', 'ela e minha amiga'],
+  'nós somos colegas': ['nós somos colegas', 'nos somos colegas', 'nós somos companheiros'],
+  'eles são alunos': ['eles são alunos', 'eles sao alunos'],
+  'você é muito gentil': ['você é muito gentil', 'voce e muito gentil', 'você é muito amável', 'voce é muito simpático'],
+  'elas são professoras': ['elas são professoras', 'elas sao professoras'],
+  'eu sou nova na turma': ['eu sou nova na turma', 'eu sou nova', 'sou nova na turma'],
+  'vocês são irmãos': ['vocês são irmãos', 'voces sao irmaos', 'vocês são irmãos?'],
+};
+function buildS3Hard() {
+  resetResult('s3h-result','s3h-answers');
+  s3hData = getRandom(s3hSentences, 4);
+  const container = document.getElementById('s3h-questions');
+  container.innerHTML = `<div style="margin-bottom:14px;padding:10px 14px;background:#fff0f8;border-radius:12px;font-size:0.85rem;font-weight:700;color:#c0185a;">
+    💡 Recordá: sou / é / somos / são
+  </div>`;
+  s3hData.forEach((q,i) => {
+    const div = document.createElement('div');
+    div.style.marginBottom = '18px';
+    div.innerHTML = `<p class="blank-question">"${q.es}"</p>
+      <input type="text" class="blank-input" id="s3h-inp-${i}" placeholder="Traducí..." autocomplete="off" style="width:100%;max-width:340px;margin-top:6px;">`;
+    container.appendChild(div);
+  });
+}
+function checkS3Hard() {
+  let correct = 0;
+  s3hData.forEach((q,i) => {
+    const inp = document.getElementById(`s3h-inp-${i}`);
+    let val = inp.value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[?!]/g,'').trim();
+    const accepted = (s3hAccept[q.pt] || [q.pt]).map(a =>
+      a.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[?!]/g,'').trim()
+    );
+    inp.disabled = true;
+    if (accepted.includes(val)) { inp.classList.add('correct'); correct++; }
+    else inp.classList.add('wrong');
+  });
+  showResult('s3h-result', correct, s3hData.length);
+  const ansHtml = s3hData.map(q => `"${q.es}" → <b>${q.pt}</b>`).join('<br>');
+  showAnswerKey('s3h-answers', ansHtml);
+}
+function retryS3Hard() { buildS3Hard(); }
+
+// ===== INIT =====
+buildS1Easy(); buildS1Medium(); buildS1Hard();
+buildS2Easy(); buildS2Medium(); buildS2Hard();
+buildS3Easy(); buildS3Medium(); buildS3Hard();
+</script>
+</body>
+</html>
